@@ -1,6 +1,7 @@
 name: CI
 
 on:
+  pull_request:
   push:
     branches:
       - master
@@ -17,14 +18,17 @@ jobs:
         include:
           - os: ubuntu-20.04
           - os: ubuntu-22.04
-          - os: macos-11
-          - os: macos-12
+          - os: ubuntu-22.04-arm
+          - os: ubuntu-24.04
+          - os: ubuntu-24.04-arm
           - os: macos-13
+          - os: macos-14
+          - os: macos-15
 
     runs-on: ${{matrix.os}}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: true
 
@@ -53,11 +57,12 @@ jobs:
         include:
           - os: windows-2019
           - os: windows-2022
+          - os: windows-2025
 
     runs-on: ${{matrix.os}}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: true
 
@@ -87,15 +92,18 @@ jobs:
         include:
           - os: ubuntu-20.04
           - os: ubuntu-22.04
-          - os: macos-11
-          - os: macos-12
+          - os: ubuntu-22.04-arm
+          - os: ubuntu-24.04
+          - os: ubuntu-24.04-arm
           - os: macos-13
+          - os: macos-14
+          - os: macos-15
 
     runs-on: ${{matrix.os}}
     timeout-minutes: 20
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: true
 
@@ -121,11 +129,12 @@ jobs:
         include:
           - os: windows-2019
           - os: windows-2022
+          - os: windows-2025
 
     runs-on: ${{matrix.os}}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: true
 
@@ -154,14 +163,14 @@ jobs:
     runs-on: ${{matrix.os}}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: true
 
       - name: Configure Boost
         run: |
           mkdir __build__ && cd __build__
-          cmake -DBUILD_TESTING=ON -DBOOST_EXCLUDE_LIBRARIES="lockfree;outcome;process;static_string;url" ..
+          cmake -DBUILD_TESTING=ON -DBOOST_EXCLUDE_LIBRARIES="process;geometry" ..
 
       - name: Build tests
         run: |
@@ -180,15 +189,18 @@ jobs:
         include:
           - os: ubuntu-20.04
           - os: ubuntu-22.04
-          - os: macos-11
-          - os: macos-12
+          - os: ubuntu-22.04-arm
+          - os: ubuntu-24.04
+          - os: ubuntu-24.04-arm
           - os: macos-13
+          - os: macos-14
+          - os: macos-15
 
     runs-on: ${{matrix.os}}
     timeout-minutes: 90
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: true
 
@@ -214,11 +226,12 @@ jobs:
         include:
           - os: windows-2019
           - os: windows-2022
+          - os: windows-2025
 
     runs-on: ${{matrix.os}}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: true
 
